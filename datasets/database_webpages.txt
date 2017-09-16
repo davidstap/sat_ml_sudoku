@@ -1,0 +1,8 @@
+https://github.com/sergisiso/Sudoku-CNF-generator
+http://www.easton.me.uk/sudoku/register.php
+en.top-sudoku.com
+http://kjell.haxx.se/sudoku/ http://www.tgmdev.be/applications/isanaki/free_sudoku_generator_solver_isanaki.php
+http://www.cs.qub.ac.uk/i.spence/SuDoku/SuDoku.html
+Hodoku
+​http://staffhome.ecm.uwa.edu.au/~00013890/sudokumin.php (15.000puzzles with 17 givens)
+https://www.ocf.berkeley.edu/~arel/sudoku/main.html
