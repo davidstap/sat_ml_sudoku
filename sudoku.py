@@ -136,10 +136,10 @@ def load_data():
                         line = line[:-1]
                         line[0] = np.array(sudoku_to_array(line[0]))
                     processed_lines.append(line)
-                print('sudokus_{}.csv processed!'.format(difficulty))
+                # print('sudokus_{}.csv processed!'.format(difficulty))
                 data.append(processed_lines)
         except FileNotFoundError:
-            print("sudokus_{}.csv not found!".format(difficulty))
+            # print("sudokus_{}.csv not found!".format(difficulty))
             continue
     return data[0][0], data[0][1:]
 
@@ -150,8 +150,8 @@ column_names, data = load_data()
 # print(len(data), len(data[0]))
 # print(len(column_names))
 for i, sudoku in enumerate(data):
-    solve(data[i][0].tolist())
     sys.stdout.flush()
+    solve(data[i][0].tolist())
     print("*"*80)
     print()
     print()
