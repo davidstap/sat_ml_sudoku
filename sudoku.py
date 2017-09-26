@@ -124,12 +124,12 @@ def sudoku_to_array(sudoku):
     return rows
 
 def load_data():
-    difficulties = ["simple", "easy", "intermediate", "expert"]
+    difficulties = ["_simple", "_easy", "_intermediate", "expert",""]
     data = []
     for difficulty in difficulties:
         processed_lines = []
         try:
-            with open('data/sudokus_{}.csv'.format(difficulty), "r") as csv:
+            with open('data/sudokus{}.csv'.format(difficulty), "r") as csv:
                 for text_line in csv:
                     line = text_line.rstrip().split(',')
                     if len(line) > 11:
@@ -141,6 +141,11 @@ def load_data():
         except FileNotFoundError:
             # print("sudokus_{}.csv not found!".format(difficulty))
             continue
+    try:
+        data[0][0]
+    except IndexError:
+        print("No sudokus file could be found!")
+        raise IndexError("No sudokus file could be found!") 
     return data[0][0], data[0][1:]
 
 
