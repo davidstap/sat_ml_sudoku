@@ -129,7 +129,7 @@ def load_data():
     for difficulty in difficulties:
         processed_lines = []
         try:
-            with open('sudokus_{}.csv'.format(difficulty), "r") as csv:
+            with open('data/sudokus_{}.csv'.format(difficulty), "r") as csv:
                 for text_line in csv:
                     line = text_line.rstrip().split(',')
                     if len(line) > 11:
