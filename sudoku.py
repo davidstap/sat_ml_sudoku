@@ -86,8 +86,7 @@ def solve(grid):
 
     # solve the SAT problem
     # verbose = 1 --> see statistics (@ terminal, TBD: get statistics in python)
-
-    sol = set(pycosat.solve(clauses, verbose = 1))
+    sol = set(pycosat.solve(clauses, verbose = 1, vars=729))
 
     def read_cell(i, j):
         # return the digit of cell i, j according to the solution
@@ -129,12 +128,23 @@ def load_data():
     for difficulty in difficulties:
         processed_lines = []
         try:
-            with open('data/sudokus{}.csv'.format(difficulty), "r") as csv:
+            with open('data/sudokus_10000{}.csv'.format(difficulty), "r") as csv:
                 for text_line in csv:
                     line = text_line.rstrip().split(',')
                     if len(line) > 11:
                         line = line[:-1]
                         line[0] = np.array(sudoku_to_array(line[0]))
+
+                    # Transform string  difficulty into integer levels
+                    if line[-1] == "Simple":
+                        line[-1] = 0
+                    elif line[-1] == "Easy":
+                        line[-1] = 1
+                    elif line[-1] == "Intermediate":
+                        line[-1] = 2
+                    elif line[-1] == "Expert":
+                        line[-1] = 3
+
                     processed_lines.append(line)
                 # print('sudokus_{}.csv processed!'.format(difficulty))
                 data.append(processed_lines)
@@ -145,22 +155,20 @@ def load_data():
         data[0][0]
     except IndexError:
         print("No sudokus file could be found!")
-        raise IndexError("No sudokus file could be found!") 
-    return data[0][0], data[0][1:]
-
+        raise IndexError("No sudokus file could be found!")
+    data = data[0]
+    return data[0], data[1:] #column names, data
 
 # Main
 import sys
 column_names, data = load_data()
-# print(len(data), len(data[0]))
-# print(len(column_names))
-for i, sudoku in enumerate(data):
+for i, sudoku_and_features in enumerate(data):
     sys.stdout.flush()
-    solve(data[i][0].tolist())
+    sudoku = sudoku_and_features[0].tolist()
+    # print("Unsolved sudoku")
+    # pprint(sudoku)
+    solve(sudoku)
+    # print("Solved sudoku")
+    # pprint(sudoku)
     print("*"*80)
-    print()
-    print()
-# sudoku = data[0][0].tolist()
-# pprint(sudoku)
-# solve(sudoku)
-# pprint(sudoku)
+    # print()
