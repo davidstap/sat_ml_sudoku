@@ -30,7 +30,7 @@ out = str(proc.communicate()[0])
 # Analyze terminal output and return the relevant statistics
 stat_names, statistics = clean_output(out)
 nr_conflicts = statistics[:,5].astype(int)
-
+print("nr_conflicts", nr_conflicts)
 # Load features
 feature_names, features = load_data()
 print('Features:\n',feature_names,'\n\nStatistics:\n',stat_names)
@@ -51,7 +51,7 @@ features = np.array(features).astype(int)
 data = np.column_stack((features, nr_conflicts))
 data_names = np.array(feature_names).reshape((len(feature_names),1)).T
 data = np.concatenate((data_names,data),axis=0)
-np.save('data/ML_data', data)
+# np.save('data/ML_data', data)
 print('\nFeature matrix plus targets is saved to data/ML_data.npy\n')
 print('Sample of data:')
 print(data)
